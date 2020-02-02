@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'pages/home_page.dart';
+import 'package:listbuy/pages/AddListPage.dart';
 
-import 'pages/List_page.dart';
-import 'route.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,7 +17,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         "/": (context) => MyHomePage(title: 'Listas e Compras'),
-        "/list": (context) => ListPage(),
+        "/add-list": (context) => AddListPage(),
       },
 
     );
@@ -59,7 +57,8 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
         ),
         body: Center(
-           child: Navigator( onGenerateRoute: Router.generateRoute),
+          //  child: Navigator( onGenerateRoute: Router.generateRoute),
+          child: HomePage(),
         ), // This trailing comma makes auto-formatting nicer for build methods.,
         bottomNavigationBar: Container(
           child: BottomNavigationBar(
