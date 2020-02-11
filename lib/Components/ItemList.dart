@@ -11,11 +11,14 @@ class ItemList extends StatefulWidget {
 
 class _ItemListState extends State<ItemList> {
   String _prefix;
+  String quantity;
   @override
   void initState() {
     super.initState();
     setState(() {
       this._prefix = this._getPrefix(widget.item.name);
+      this.quantity = (widget.item.quantity>9)? 
+      widget.item.quantity.toString():"0"+widget.item.quantity.toString();
     });
   }
 
@@ -28,10 +31,11 @@ class _ItemListState extends State<ItemList> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Column(
           children: <Widget>[
-            Container(
+            Container(              
               margin: EdgeInsets.all(5.0),
               decoration: BoxDecoration(
                 color: Colors.blue[900],
@@ -58,16 +62,16 @@ class _ItemListState extends State<ItemList> {
               )),
         ),
         Column(
+          
           children: <Widget>[
-            Container(
+            Container(              
               margin: EdgeInsets.all(5.0),
               decoration: BoxDecoration(
                   color: Colors.lightGreen[400],
                   borderRadius: BorderRadius.circular(50.0)
                   ),
               padding: EdgeInsets.all(10.0),
-              child: Text(widget.item.quantity.toString(),
-              ),
+              child: Text(this.quantity.toString()),
             )
           ],
         )

@@ -28,12 +28,6 @@ class _AddListState extends State<AddList> {
       context: context,
 
       builder: (BuildContext context) {
-        // return Container(
-        //   decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.all(Radius.circular(100))
-        //   ),
-        //   width: 100,
-          // child: AddItem());
         return AddItem();
       },
     );

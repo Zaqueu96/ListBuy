@@ -10,15 +10,13 @@ class AddItem extends StatefulWidget {
 }
 
 class _AddItemState extends State<AddItem> {
-  Item produto; // Item
-  String name;
-  int quantity;
+  Item produto = null; // Item
+  String name = "";
+  String quantity = "";
   @override
   void initState() {
+    this.produto = new Item();;
     super.initState();
-    setState(() {
-      this.produto = new Item();
-    });
   }
 
   // Add Attribute
@@ -26,43 +24,38 @@ class _AddItemState extends State<AddItem> {
     setState(() {
       print(this.name + " - " + this.quantity.toString());
       this.produto.name = this.name;
-      this.produto.quantity = this.quantity;
+      this.produto.quantity = int.parse(this.quantity);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-        title: Text('Add item'),
+        title: Text('Adicionar item'),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
         content: Builder(
           builder: (context) {
             return Container(
-              height: 150,              
-              child: ListView(              
-              children: <Widget>[
-                InputText(
-                  labelText: "Nome do Item",
-                  oncharge: ((value) => {
-                        setState(() {
-                          print(value);
-                          this.name = value;
-                        })
+                height: 150,
+                child: ListView(
+                  children: <Widget>[
+                    InputText(
+                      labelText: "Nome do Item",
+                      oncharge: (value) => setState(() {
+                        print(value);
+                        this.name = value;
                       }),
-                ),
-                InputNumber(
-                  labelText: "Quantidade(opicional)",
-                  oncharge: ((value)  {
-                        setState(() {
-                          this.quantity = value;
-                          print("sss : "+this.quantity.toString());
-                        });
+                    ),
+                    InputNumber(
+                      labelText: "Quantidade(opicional)",
+                      oncharge: (value) => setState(() {
+                        print(value);
+                        this.quantity = value;
                       }),
-                ),
-              ],
-            )
-            );
+                    ),
+                  ],
+                ));
           },
         ),
         actions: <Widget>[
