@@ -1,4 +1,4 @@
-import 'package:listbuy/src/src/models/Item.dart';
+import 'package:listbuy/src/models/Item.dart';
 
 class ListBuy{
   int id;

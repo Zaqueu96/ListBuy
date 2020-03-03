@@ -1,6 +1,6 @@
 import 'package:listbuy/config/AppDatabase.dart';
-import 'package:listbuy/src/src/models/Item.dart';
-import 'package:listbuy/src/src/models/ListBuy.dart';
+import 'package:listbuy/src/models/Item.dart';
+import 'package:listbuy/src/models/ListBuy.dart';
 import 'package:sembast/sembast.dart';
 
 class DaoListBuy {

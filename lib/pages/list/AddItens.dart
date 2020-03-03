@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:listbuy/Components/Inputs.dart';
-import 'package:listbuy/src/src/models/Item.dart';
+import 'package:listbuy/src/models/Item.dart';
 
 class AddItem extends StatefulWidget {
   const AddItem({Key key}) : super(key: key);
@@ -43,14 +43,12 @@ class _AddItemState extends State<AddItem> {
                     InputText(
                       labelText: "Nome do Item",
                       oncharge: (value) => setState(() {
-                        print(value);
                         this.name = value;
                       }),
                     ),
                     InputNumber(
                       labelText: "Quantidade(opicional)",
                       oncharge: (value) => setState(() {
-                        print(value);
                         this.quantity = value;
                       }),
                     ),

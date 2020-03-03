@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:listbuy/Components/Inputs.dart';
 import 'package:listbuy/Components/ItemList.dart';
 import 'package:listbuy/pages/list/AddItens.dart';
-import 'package:listbuy/src/src/models/Item.dart';
+import 'package:listbuy/src/models/Item.dart';
 
 class AddList extends StatefulWidget {
   AddList({Key key}) : super(key: key);

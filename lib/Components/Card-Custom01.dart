@@ -10,9 +10,10 @@ class CardCustom01 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+
         onTap: this.callback,
         child: Container(
-          width: 100.0,
+          width: (MediaQuery.of(context).size.width/2.5),
           child: Card(            
               child: Padding(
                 padding: EdgeInsets.all(10.0),

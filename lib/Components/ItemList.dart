@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:listbuy/src/src/models/Item.dart';
+import 'package:listbuy/src/models/Item.dart';
 
 class ItemList extends StatefulWidget {
 
