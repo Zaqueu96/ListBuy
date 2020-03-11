@@ -1,5 +1,7 @@
 // import 'package:listbuy/Dao/DaoListBuy.dart';
+import 'package:listbuy/Dao/DaoListBuy.dart';
 import 'package:listbuy/src/models/Item.dart';
+import 'package:listbuy/src/models/ListBuy.dart';
 // import 'package:listbuy/src/models/ListBuy.dart';
 
 enum  StatusBuy {
@@ -12,7 +14,9 @@ class Buy {
   double currencyLimit;
   String location;
   List<Item> extras;
-  StatusBuy statusBuy;
+  List<Item> list;
+  List<Item> car;
+  String statusBuy;
   String created;
   String finished;
 
@@ -29,6 +33,18 @@ Buy();
         extras.add(new Item.fromJson(v));
       });
     }
+    if (json['car'] != null) {
+      car = new List<Item>();
+      json['car'].forEach((v) {
+        car.add(new Item.fromJson(v));
+      });
+    }
+    if (json['list'] != null) {
+      list = new List<Item>();
+      json['list'].forEach((v) {
+        list.add(new Item.fromJson(v));
+      });
+    }
     statusBuy = json['statusBuy'];
     created = json['created'];
     finished = json['finished'];
@@ -43,10 +59,15 @@ Buy();
     if (this.extras != null) {
       data['extras'] = this.extras.map((v) => v.toJson()).toList();
     }
+    if (this.list != null) {
+      data['list'] = this.list.map((v) => v.toJson()).toList();
+    }
+    if (this.car != null) {
+      data['car'] = this.car.map((v) => v.toJson()).toList();
+    }
     data['statusBuy'] = this.statusBuy;
     data['created'] = this.created;
     data['finished'] = this.finished;
     return data;
   }
 }
-

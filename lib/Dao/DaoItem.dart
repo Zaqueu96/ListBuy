@@ -1,60 +1,59 @@
-
 import 'package:listbuy/config/AppDatabase.dart';
-import 'package:listbuy/src/models/ListBuy.dart';
+import 'package:listbuy/src/models/Item.dart';
+import 'package:listbuy/src/models/Item.dart';
 import 'package:sembast/sembast.dart';
 
-class DaoListBuy {
+class DaoItem {
 
-  static const String LIST_BUY = 'listsBuys';
+  static const String ITEM = 'item';
   // A Store with int keys and Map<String, dynamic> values.
   // This Store acts like a persistent map, values of which are User objects converted to Map
-  final _daoList = intMapStoreFactory.store(LIST_BUY);
+  final _daoList = intMapStoreFactory.store(ITEM);
 
   // Private getter to shorten the amount of code needed to get the
   // singleton instance of an opened database.
   Future<Database> get _db async => await AppDatabase.instance.database;
 
-  Future insert(ListBuy listbuy) async {
+  Future insert(Item item) async {
 
-    await _daoList.add(await _db, listbuy.toJson());
+    await _daoList.add(await _db, item.toJson());
   }
 
-Future<ListBuy> getById(int id) async {
+Future<Item> getById(int id) async {
     final finder = Finder(filter: Filter.byKey(id));
-    // Buy result = new Buy();
     List<RecordSnapshot> snapshot =
         await this._daoList.find(await _db, finder: finder);
-      ListBuy result = ListBuy.fromJson(snapshot[0].value);
+      Item result = Item.fromJson(snapshot[0].value);
       print(snapshot[0].value);
       result.id = snapshot[0].key;
     return result;
   }
-  Future<List<ListBuy>> getAll()async{
+  Future<List<Item>> getAll()async{
     final finder = Finder(sortOrders: [SortOrder('name')]);
     List<RecordSnapshot>  resultSnapshot =  await this._daoList.find(
       await _db,finder: finder
       );
 
       return resultSnapshot.map((snapshot){
-        ListBuy list = ListBuy.fromJson(snapshot.value);
+        Item list = Item.fromJson(snapshot.value);
         list.id  = snapshot.key;
         return list;
       }).toList();
   }
 
-  Future update(ListBuy listbuy) async {
+  Future update(Item item) async {
     // For filtering by key (ID), RegEx, greater than, and many other criteria,
     // we use a Finder.
-    final finder = Finder(filter: Filter.byKey(listbuy.id));
+    final finder = Finder(filter: Filter.byKey(item.id));
     await _daoList.update(
       await _db,
-      listbuy.toJson(),
+      item.toJson(),
       finder: finder,
     );
   }
 
-  Future delete(ListBuy listbuy) async {
-    final finder = Finder(filter: Filter.byKey(listbuy.id));
+  Future delete(Item item) async {
+    final finder = Finder(filter: Filter.byKey(item.id));
     await _daoList.delete(
       await _db,
       finder: finder,

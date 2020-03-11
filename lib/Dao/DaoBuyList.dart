@@ -15,6 +15,7 @@ class DaoBuyList {
   Future<Database> get _db async => await AppDatabase.instance.database;
 
   Future<int> insert(Buy buy) async {
+    buy.created = DateTime.now().toString();
     int resultId = await _daoList.add(await _db, buy.toJson());
     return resultId;
   }
@@ -37,6 +38,8 @@ class DaoBuyList {
     List<RecordSnapshot> snapshot =
         await this._daoList.find(await _db, finder: finder);
       Buy result = Buy.fromJson(snapshot[0].value);
+      print(result.list);
+      print(snapshot[0].value);
       result.id = snapshot[0].key;
     return result;
   }

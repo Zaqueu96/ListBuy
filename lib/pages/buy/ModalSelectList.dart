@@ -1,41 +1,44 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:listbuy/Components/Inputs.dart';
 import 'package:listbuy/Dao/DaoBuyList.dart';
+import 'package:listbuy/pages/buy/GoBuy.dart';
 import 'package:listbuy/src/models/Buy.dart';
 import 'package:listbuy/src/models/ListBuy.dart';
 import 'package:lottie/lottie.dart';
+
 class ModalSelectList extends StatefulWidget {
   final ListBuy list;
-  ModalSelectList({Key key,@required this.list}):super(key:key);
+  ModalSelectList({Key key, @required this.list}) : super(key: key);
   @override
   _ModalSelectListState createState() => _ModalSelectListState();
 }
 
 class _ModalSelectListState extends State<ModalSelectList> {
- DaoBuyList dao;
- Buy buylist;
+  DaoBuyList dao;
+  Buy buylist;
   @override
   void initState() {
     super.initState();
     buylist = new Buy();
     buylist.listId = widget.list.id;
+    buylist.list = widget.list.itens;
     dao = new DaoBuyList();
     // lists();
   }
 
-  Future lists(int id) async{
+  Future lists(int id) async {
     Buy b = await dao.getById(id);
     print(b.location);
   }
-  Future saveBuy() async{
+
+  Future saveBuy(BuildContext context) async {
     int id = await dao.insert(buylist);
-    await lists(id);
+    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> GoBuy(buyId: id)));
   }
 
-    @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -64,16 +67,15 @@ class _ModalSelectListState extends State<ModalSelectList> {
             Lottie.asset("lottie/animation_list.json",
                 height: MediaQuery.of(context).size.height / 2.2),
             Container(
-              margin: EdgeInsets.only(bottom: 20),
+                margin: EdgeInsets.only(bottom: 20),
                 child: Text(
-              "${widget.list.name}",
-              textAlign: TextAlign.center,
-              style: GoogleFonts.sourceSansPro(
-                  fontWeight: FontWeight.bold, fontSize: 25,
-                  color: Colors.blueAccent[500]),
-            )
-
-            ),
+                  "${widget.list.name}",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.sourceSansPro(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      color: Colors.blueAccent[500]),
+                )),
             InputText(
               labelText: "Local onde deseja Comprar?",
               oncharge: (v) => {buylist.location = v},
@@ -89,16 +91,12 @@ class _ModalSelectListState extends State<ModalSelectList> {
                     borderRadius: BorderRadius.circular(25)),
                 icon: Icon(Icons.check),
                 color: Colors.amberAccent,
-                onPressed: () async => { await saveBuy()},
+                onPressed: () async => {await saveBuy(context)},
                 label: Text(
                   "Vamos lá",
                   style: GoogleFonts.sourceSansPro(fontWeight: FontWeight.bold),
                 ))
-
           ]),
     );
-
   }
 }
-
-
